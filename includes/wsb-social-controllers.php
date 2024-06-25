@@ -1,7 +1,7 @@
 <?php
 function get_wsb_social_links($product_url, $product_title, $share_text) {
     $options = get_option('wsb_settings');
-    $platforms = ['facebook', 'twitter', 'linkedin', 'email', 'tiktok', 'instagram', 'pinterest'];
+    $platforms = ['facebook', 'twitter', 'linkedin', 'email', 'instagram', 'pinterest'];
 
     $social_links = [];
 
@@ -25,9 +25,7 @@ function get_wsb_social_links($product_url, $product_title, $share_text) {
                 case 'email':
                     $url = "mailto:?subject=" . urlencode($product_title) . "&body=" . urlencode($share_text . $product_url);
                     break;
-                case 'tiktok':
-                    $url = "https://www.tiktok.com/share?url=" . urlencode($product_url) . "&text=" . urlencode($share_text . $product_title);
-                    break;
+                
                 case 'instagram':
                     $url = "https://www.instagram.com/?url=" . urlencode($product_url);
                     break;
