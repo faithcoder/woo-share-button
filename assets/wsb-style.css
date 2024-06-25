@@ -1,0 +1,20 @@
+.custom-share-buttons {
+    margin-top: 20px;
+}
+
+.custom-share-buttons a {
+    margin-right: 10px;
+    text-decoration: none;
+    padding: 10px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.custom-share-buttons a i {
+    font-size: 20px;
+    line-height: 20px;
+}
