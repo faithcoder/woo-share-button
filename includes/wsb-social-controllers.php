@@ -1,7 +1,7 @@
 <?php
 function get_wsb_social_links($product_url, $product_title, $share_text) {
     $options = get_option('wsb_settings');
-    $platforms = ['facebook', 'twitter', 'linkedin', 'email', 'instagram', 'pinterest'];
+    $platforms = ['facebook', 'twitter', 'linkedin', 'email', 'instagram', 'pinterest','whatsapp','telegram'];
 
     $social_links = [];
 
@@ -32,6 +32,13 @@ function get_wsb_social_links($product_url, $product_title, $share_text) {
                 case 'pinterest':
                     $url = "https://pinterest.com/pin/create/button/?url=" . urlencode($product_url) . "&description=" . urlencode($share_text . $product_title);
                     break;
+                case 'whatsapp':
+                    $url = "https://wa.me/?text=" . urlencode($share_text . $product_title . ': ' . $product_url);
+                    break;
+                case 'telegram':
+                    $url = "https://t.me/share/url?url=" . urlencode($product_url) . "&text=" . urlencode($share_text . $product_title);
+                    break;
+                   
             }
 
             $social_links[] = [

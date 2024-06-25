@@ -18,7 +18,7 @@ function wsb_settings_init() {
     );
 
     // Add settings fields for each platform
-    $platforms = ['facebook', 'twitter', 'linkedin', 'email', 'instagram', 'pinterest'];
+    $platforms = ['facebook', 'twitter', 'linkedin', 'email', 'instagram', 'pinterest', 'whatsapp','telegram'];
     foreach ($platforms as $platform) {
         add_settings_field(
             "wsb_{$platform}_enabled",
@@ -72,7 +72,7 @@ function wsb_options_page() {
 }
 
 // Render functions for settings fields
-$platforms = ['facebook', 'twitter', 'linkedin', 'email', 'instagram', 'pinterest'];
+$platforms = ['facebook', 'twitter', 'linkedin', 'email', 'instagram', 'pinterest','whatsapp','telegram'];
 foreach ($platforms as $platform) {
     eval("
     function wsb_{$platform}_enabled_render() {
