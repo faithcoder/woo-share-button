@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: WooCommerce Share Buttons
- * Plugin URI:  http://example.com
+ * Plugin URI:  http://faithcoder.com
  * Description: Adds custom share buttons below the product summary on WooCommerce product pages.
  * Version:     1.0.0
  * Author:      M Arif
