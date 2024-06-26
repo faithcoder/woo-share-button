@@ -41,5 +41,4 @@ function wsb_enqueue_admin_assets($hook_suffix) {
     wp_enqueue_script('wsb-admin-script', plugin_dir_url(__FILE__) . 'assets/admin-script.js', ['jquery'], null, true);
 }
 
-// Add share buttons below add to cart button
-add_action('woocommerce_simple_add_to_cart', 'wsb_woocommerce_share_buttons', 45);
+add_action('woocommerce_share', 'wsb_woocommerce_share_buttons', 45);

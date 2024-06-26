@@ -1,11 +1,20 @@
 <?php
 // Add settings page
-add_action('admin_menu', 'wsb_add_admin_menu');
+
+add_action('admin_menu', 'wsb_add_admin_menu', 99);
 add_action('admin_init', 'wsb_settings_init');
 
 function wsb_add_admin_menu() {
-    add_options_page('WooCommerce Share Buttons', 'Share Buttons', 'manage_options', 'woocommerce-share-buttons', 'wsb_options_page');
+    add_submenu_page(
+        'woocommerce',                    // Parent slug
+        'WooCommerce Share Buttons',      // Page title
+        'Woo Share Buttons',              // Menu title
+        'manage_options',                 // Capability
+        'woocommerce-share-buttons',      // Menu slug
+        'wsb_options_page'                // Callback function
+    );
 }
+
 
 
 function wsb_settings_init() {
@@ -63,9 +72,9 @@ foreach ($platforms as $platform) {
         \$options = get_option('wsb_settings');
         ?>
       
-        <label class='switch'>
+        <label class='wsb-switch'>
             <input type='checkbox' name='wsb_settings[wsb_{$platform}_enabled]' class='wsb-toggle' <?php checked(isset(\$options['wsb_{$platform}_enabled'])); ?> value='1'>
-            <span class='slider round'></span>
+            <span class='wsb-slider wsb-round'></span>
         </label>
         <?php
     }
