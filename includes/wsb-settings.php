@@ -6,9 +6,9 @@ add_action('admin_init', 'wsb_settings_init');
 
 function wsb_add_admin_menu() {
     add_submenu_page(
-        'woocommerce',                    // Parent slug
-        'WooCommerce Share Buttons',      // Page title
-        'Woo Share Buttons',              // Menu title
+        'woocommerce',                      // Parent slug
+        'WooCommerce Social Share Buttons',      // Page title
+        'Woo Social Share',                 // Menu title
         'manage_options',                 // Capability
         'woocommerce-share-buttons',      // Menu slug
         'wsb_options_page'                // Callback function
@@ -140,7 +140,6 @@ foreach ($platforms as $platform) {
             
         </div>
 
-        
 
         <?php
     }
