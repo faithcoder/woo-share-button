@@ -1,8 +1,8 @@
-.custom-share-buttons {
+.wsb-share-buttons {
     margin-top: 20px;
 }
 
-.custom-share-buttons a {
+.wsb-share-buttons a {
     margin-right: 10px;
     text-decoration: none;
     display: inline-block;
@@ -10,6 +10,10 @@
     transition: all 0.3s ease;
 }
 
-.custom-share-buttons a:hover {
+.wsb-share-buttons a:hover {
     opacity: 0.8;
+}
+
+.wsb-share-buttons h4 {
+    font-size: 20px;
 }
