@@ -27,7 +27,7 @@ include_once WSB_PLUGIN_DIR . 'includes/wsb-render-html.php';
 add_action('wp_enqueue_scripts', 'wsb_enqueue_assets');
 function wsb_enqueue_assets() {
     wp_enqueue_style('wsb-style', plugins_url('assets/wsb-style.css', __FILE__));
-    wp_enqueue_style('fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+    wp_enqueue_style('fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
 }
 
 // Enqueue admin scripts and styles

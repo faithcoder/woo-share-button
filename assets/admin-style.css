@@ -57,4 +57,24 @@ input:checked + .slider:before {
     padding: 10px;
     border: 1px solid #ddd;
     margin-top: 10px;
+    background-color: #fff;
+}
+
+.wsb-style-controllers {
+    max-width: 600px;
+    border-collapse: collapse;
+}
+
+.wsb-style-controllers td {
+    border: none;
+    padding: 8px;
+}
+
+.wsb-style-controllers label {
+    display: inline-block;
+    min-width: 100px;
+}
+
+.wsb-color-field {
+    width: 100%;
 }

@@ -18,7 +18,7 @@ function wsb_settings_init() {
         'wsb_settings_group'
     );
 
-    $platforms = ['facebook', 'twitter', 'linkedin', 'email', 'tiktok', 'instagram', 'pinterest', 'telegram', 'whatsapp'];
+    $platforms = ['facebook', 'twitter', 'linkedin', 'email', 'instagram', 'pinterest', 'telegram', 'whatsapp'];
     foreach ($platforms as $platform) {
         add_settings_field(
             "wsb_{$platform}_enabled",
@@ -56,12 +56,13 @@ function wsb_options_page() {
 }
 
 // Render functions for settings fields
-$platforms = ['facebook', 'twitter', 'linkedin', 'email', 'tiktok', 'instagram', 'pinterest', 'telegram', 'whatsapp'];
+$platforms = ['facebook', 'twitter', 'linkedin', 'email', 'instagram', 'pinterest', 'telegram', 'whatsapp'];
 foreach ($platforms as $platform) {
     $function_code = "
     function wsb_{$platform}_enabled_render() {
         \$options = get_option('wsb_settings');
         ?>
+      
         <label class='switch'>
             <input type='checkbox' name='wsb_settings[wsb_{$platform}_enabled]' class='wsb-toggle' <?php checked(isset(\$options['wsb_{$platform}_enabled'])); ?> value='1'>
             <span class='slider round'></span>
@@ -75,13 +76,63 @@ foreach ($platforms as $platform) {
         ?>
         <div class='wsb-style-controllers' style='display: <?php echo \$enabled; ?>;'>
             <h4><?php echo ucfirst('$platform'); ?> Style Options</h4>
-            <label>Icon Color: <input type='text' name='wsb_settings[wsb_{$platform}_color]' value='<?php echo isset(\$options['wsb_{$platform}_color']) ? esc_attr(\$options['wsb_{$platform}_color']) : '#ffffff'; ?>' class='wsb-color-field'></label><br>
-            <label>Background Color: <input type='text' name='wsb_settings[wsb_{$platform}_bg_color]' value='<?php echo isset(\$options['wsb_{$platform}_bg_color']) ? esc_attr(\$options['wsb_{$platform}_bg_color']) : '#0073aa'; ?>' class='wsb-color-field'></label><br>
-            <label>Icon: <input type='text' name='wsb_settings[wsb_{$platform}_icon]' value='<?php echo isset(\$options['wsb_{$platform}_icon']) ? esc_attr(\$options['wsb_{$platform}_icon']) : 'fab fa-{$platform}'; ?>'></label><br>
-            <label>Icon Size: <input type='number' name='wsb_settings[wsb_{$platform}_icon_size]' value='<?php echo isset(\$options['wsb_{$platform}_icon_size']) ? esc_attr(\$options['wsb_{$platform}_icon_size']) : '20'; ?>'></label><br>
-            <label>Line Height: <input type='number' name='wsb_settings[wsb_{$platform}_line_height]' value='<?php echo isset(\$options['wsb_{$platform}_line_height']) ? esc_attr(\$options['wsb_{$platform}_line_height']) : '20'; ?>'></label><br>
-            <label>Border Radius: <input type='number' name='wsb_settings[wsb_{$platform}_border_radius]' value='<?php echo isset(\$options['wsb_{$platform}_border_radius']) ? esc_attr(\$options['wsb_{$platform}_border_radius']) : '4'; ?>'></label>
+            <table>
+            <tr>
+                <td>
+                <label>Icon Color: </label> 
+                </td>
+                <td>
+                <input type='text' name='wsb_settings[wsb_{$platform}_color]' value='<?php echo isset(\$options['wsb_{$platform}_color']) ? esc_attr(\$options['wsb_{$platform}_color']) : '#ffffff'; ?>' class='wsb-color-field'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Background Color: </label>
+                </td>
+                <td>
+                    <input type='text' name='wsb_settings[wsb_{$platform}_bg_color]' value='<?php echo isset(\$options['wsb_{$platform}_bg_color']) ? esc_attr(\$options['wsb_{$platform}_bg_color']) : '#0073aa'; ?>' class='wsb-color-field'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Icon Class: </label>
+                </td>
+                <td>
+                    <input type='text' name='wsb_settings[wsb_{$platform}_icon]' value='<?php echo isset(\$options['wsb_{$platform}_icon']) ? esc_attr(\$options['wsb_{$platform}_icon']) : 'fab fa-{$platform}'; ?>'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                     <label>Icon Size: </label>
+                </td>
+                <td>
+                    <input type='number' name='wsb_settings[wsb_{$platform}_icon_size]' value='<?php echo isset(\$options['wsb_{$platform}_icon_size']) ? esc_attr(\$options['wsb_{$platform}_icon_size']) : '20'; ?>'>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                     <label>Line Height: </label>
+                </td>
+                <td>
+                    <input type='number' name='wsb_settings[wsb_{$platform}_line_height]' value='<?php echo isset(\$options['wsb_{$platform}_line_height']) ? esc_attr(\$options['wsb_{$platform}_line_height']) : '20'; ?>'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                     <label>Border Radius: </label>
+                </td>
+                <td>
+                    <input type='number' name='wsb_settings[wsb_{$platform}_border_radius]' value='<?php echo isset(\$options['wsb_{$platform}_border_radius']) ? esc_attr(\$options['wsb_{$platform}_border_radius']) : '4'; ?>'>
+                </td>
+            </tr>
+
+            </table>
+            
         </div>
+
+        
+
         <?php
     }
     ";
