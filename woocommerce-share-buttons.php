@@ -40,3 +40,4 @@ function wsb_enqueue_admin_assets($hook_suffix) {
 
 // Add share buttons below product summary
 add_action('woocommerce_single_product_summary', 'custom_woocommerce_share_buttons', 45);
+
