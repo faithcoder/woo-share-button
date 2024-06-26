@@ -6,6 +6,8 @@ add_action('admin_init', 'wsb_settings_init');
 function wsb_add_admin_menu() {
     add_options_page('WooCommerce Share Buttons', 'Share Buttons', 'manage_options', 'woocommerce-share-buttons', 'wsb_options_page');
 }
+
+
 function wsb_settings_init() {
     register_setting('wsb_settings_group', 'wsb_settings');
 
@@ -27,49 +29,9 @@ function wsb_settings_init() {
         );
 
         add_settings_field(
-            "wsb_{$platform}_color",
-            ucfirst($platform) . ' Icon Color',
-            "wsb_{$platform}_color_render",
-            'wsb_settings_group',
-            'wsb_settings_section'
-        );
-
-        add_settings_field(
-            "wsb_{$platform}_bg_color",
-            ucfirst($platform) . ' Background Color',
-            "wsb_{$platform}_bg_color_render",
-            'wsb_settings_group',
-            'wsb_settings_section'
-        );
-
-        add_settings_field(
-            "wsb_{$platform}_icon",
-            ucfirst($platform) . ' Icon',
-            "wsb_{$platform}_icon_render",
-            'wsb_settings_group',
-            'wsb_settings_section'
-        );
-
-        add_settings_field(
-            "wsb_{$platform}_icon_size",
-            ucfirst($platform) . ' Icon Size',
-            "wsb_{$platform}_icon_size_render",
-            'wsb_settings_group',
-            'wsb_settings_section'
-        );
-
-        add_settings_field(
-            "wsb_{$platform}_line_height",
-            ucfirst($platform) . ' Line Height',
-            "wsb_{$platform}_line_height_render",
-            'wsb_settings_group',
-            'wsb_settings_section'
-        );
-
-        add_settings_field(
-            "wsb_{$platform}_border_radius",
-            ucfirst($platform) . ' Border Radius',
-            "wsb_{$platform}_border_radius_render",
+            "wsb_{$platform}_style",
+            '',
+            "wsb_{$platform}_style_render",
             'wsb_settings_group',
             'wsb_settings_section'
         );
@@ -96,56 +58,34 @@ function wsb_options_page() {
 // Render functions for settings fields
 $platforms = ['facebook', 'twitter', 'linkedin', 'email', 'tiktok', 'instagram', 'pinterest', 'telegram', 'whatsapp'];
 foreach ($platforms as $platform) {
-    eval("
+    $function_code = "
     function wsb_{$platform}_enabled_render() {
         \$options = get_option('wsb_settings');
         ?>
-        <input type='checkbox' name='wsb_settings[wsb_{$platform}_enabled]' <?php checked(isset(\$options['wsb_{$platform}_enabled'])); ?> value='1'>
-        <label><?php _e('Enable', 'woocommerce-share-buttons'); ?></label>
+        <label class='switch'>
+            <input type='checkbox' name='wsb_settings[wsb_{$platform}_enabled]' class='wsb-toggle' <?php checked(isset(\$options['wsb_{$platform}_enabled'])); ?> value='1'>
+            <span class='slider round'></span>
+        </label>
         <?php
     }
 
-    function wsb_{$platform}_color_render() {
+    function wsb_{$platform}_style_render() {
         \$options = get_option('wsb_settings');
+        \$enabled = isset(\$options['wsb_{$platform}_enabled']) ? 'block' : 'none';
         ?>
-        <input type='text' name='wsb_settings[wsb_{$platform}_color]' value='<?php echo isset(\$options['wsb_{$platform}_color']) ? esc_attr(\$options['wsb_{$platform}_color']) : '#ffffff'; ?>' class='wsb-color-field'>
+        <div class='wsb-style-controllers' style='display: <?php echo \$enabled; ?>;'>
+            <h4><?php echo ucfirst('$platform'); ?> Style Options</h4>
+            <label>Icon Color: <input type='text' name='wsb_settings[wsb_{$platform}_color]' value='<?php echo isset(\$options['wsb_{$platform}_color']) ? esc_attr(\$options['wsb_{$platform}_color']) : '#ffffff'; ?>' class='wsb-color-field'></label><br>
+            <label>Background Color: <input type='text' name='wsb_settings[wsb_{$platform}_bg_color]' value='<?php echo isset(\$options['wsb_{$platform}_bg_color']) ? esc_attr(\$options['wsb_{$platform}_bg_color']) : '#0073aa'; ?>' class='wsb-color-field'></label><br>
+            <label>Icon: <input type='text' name='wsb_settings[wsb_{$platform}_icon]' value='<?php echo isset(\$options['wsb_{$platform}_icon']) ? esc_attr(\$options['wsb_{$platform}_icon']) : 'fab fa-{$platform}'; ?>'></label><br>
+            <label>Icon Size: <input type='number' name='wsb_settings[wsb_{$platform}_icon_size]' value='<?php echo isset(\$options['wsb_{$platform}_icon_size']) ? esc_attr(\$options['wsb_{$platform}_icon_size']) : '20'; ?>'></label><br>
+            <label>Line Height: <input type='number' name='wsb_settings[wsb_{$platform}_line_height]' value='<?php echo isset(\$options['wsb_{$platform}_line_height']) ? esc_attr(\$options['wsb_{$platform}_line_height']) : '20'; ?>'></label><br>
+            <label>Border Radius: <input type='number' name='wsb_settings[wsb_{$platform}_border_radius]' value='<?php echo isset(\$options['wsb_{$platform}_border_radius']) ? esc_attr(\$options['wsb_{$platform}_border_radius']) : '4'; ?>'></label>
+        </div>
         <?php
     }
-
-    function wsb_{$platform}_bg_color_render() {
-        \$options = get_option('wsb_settings');
-        ?>
-        <input type='text' name='wsb_settings[wsb_{$platform}_bg_color]' value='<?php echo isset(\$options['wsb_{$platform}_bg_color']) ? esc_attr(\$options['wsb_{$platform}_bg_color']) : '#0073aa'; ?>' class='wsb-color-field'>
-        <?php
-    }
-
-    function wsb_{$platform}_icon_render() {
-        \$options = get_option('wsb_settings');
-        ?>
-        <input type='text' name='wsb_settings[wsb_{$platform}_icon]' value='<?php echo isset(\$options['wsb_{$platform}_icon']) ? esc_attr(\$options['wsb_{$platform}_icon']) : 'fab fa-{$platform}'; ?>'>
-        <?php
-    }
-
-    function wsb_{$platform}_icon_size_render() {
-        \$options = get_option('wsb_settings');
-        ?>
-        <input type='number' name='wsb_settings[wsb_{$platform}_icon_size]' value='<?php echo isset(\$options['wsb_{$platform}_icon_size']) ? esc_attr(\$options['wsb_{$platform}_icon_size']) : '20'; ?>'>
-        <?php
-    }
-
-    function wsb_{$platform}_line_height_render() {
-        \$options = get_option('wsb_settings');
-        ?>
-        <input type='number' name='wsb_settings[wsb_{$platform}_line_height]' value='<?php echo isset(\$options['wsb_{$platform}_line_height']) ? esc_attr(\$options['wsb_{$platform}_line_height']) : '20'; ?>'>
-        <?php
-    }
-
-    function wsb_{$platform}_border_radius_render() {
-        \$options = get_option('wsb_settings');
-        ?>
-        <input type='number' name='wsb_settings[wsb_{$platform}_border_radius]' value='<?php echo isset(\$options['wsb_{$platform}_border_radius']) ? esc_attr(\$options['wsb_{$platform}_border_radius']) : '4'; ?>'>
-        <?php
-    }
-    ");
+    ";
+    eval($function_code);
 }
+
 

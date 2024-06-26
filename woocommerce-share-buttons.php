@@ -36,8 +36,10 @@ function wsb_enqueue_admin_assets($hook_suffix) {
     wp_enqueue_style('wp-color-picker');
     wp_enqueue_script('wp-color-picker');
     wp_enqueue_script('wsb-color-picker-script', plugins_url('/assets/color-picker-script.js', __FILE__), array('wp-color-picker'), false, true);
+
+    wp_enqueue_style('wsb-admin-style', plugin_dir_url(__FILE__) . 'assets/admin-style.css');
+    wp_enqueue_script('wsb-admin-script', plugin_dir_url(__FILE__) . 'assets/admin-script.js', ['jquery'], null, true);
 }
 
 // Add share buttons below product summary
 add_action('woocommerce_single_product_summary', 'custom_woocommerce_share_buttons', 45);
-
