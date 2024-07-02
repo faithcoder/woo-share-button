@@ -1,7 +1,7 @@
 <?php
 function get_wsb_social_links($product_url, $product_title, $share_text) {
     $options = get_option('wsb_settings');
-    $platforms = ['facebook', 'twitter', 'linkedin', 'email', 'instagram', 'pinterest', 'telegram', 'whatsapp'];
+    $platforms = ['facebook', 'twitter', 'linkedin', 'instagram', 'pinterest', 'telegram', 'whatsapp'];
 
     $social_links = [];
 
@@ -25,10 +25,6 @@ function get_wsb_social_links($product_url, $product_title, $share_text) {
                 case 'linkedin':
                     $url = "https://www.linkedin.com/shareArticle?mini=true&url=" . urlencode($product_url) . "&title=" . urlencode($product_title);
                     break;
-                case 'email':
-                    $url = "mailto:?subject=" . urlencode($product_title) . "&body=" . urlencode($share_text . $product_url);
-                    break;
-                
                 case 'instagram':
                     $url = "https://www.instagram.com/?url=" . urlencode($product_url);
                     break;
